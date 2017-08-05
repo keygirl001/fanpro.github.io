@@ -1,16 +1,24 @@
-> 写写代码，做做设计，  
-> 离开世界之前，一切都是过程。
+> 勤奋努力的姑娘最漂亮，
+> 认真最好自己喜欢的事情。
 
-Hey，我是黄玄，病毒种，进化程度不明，多出没于[博客](https://huangxuan.me)、[微博](weibo.com/huxpro)、[知乎](https://www.zhihu.com/people/huxpro/pins/posts)、[Twitter](https://twitter.com/Huxpro/)、[Github](http://github.com/huxpro)、[Medium](https://medium.com/@Huxpro) 等地带，绝招尚在开发中。
+hello，我是曹帆，一个不怎么聪明的姑娘，前端小白，希望这个个人博客会督促我前端和生活的成长。
 
-职业是软件工程师，[Web 工会](https://medium.com/ben-and-dion/team-web-3315aa447fb2#.359a9c6cl)活跃成员。曾被招募为淘宝网 · [阿里旅行](http://alitrip.com)前端工程师、微影时代 · [微票儿](http://www.wepiao.com/?r=movie)前端基础工程团队负责人、[饿了么](https://ele.me/) · 大前端团队 · [PWA 顾问](https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509)。
+即将步入社会的我，带着兴奋，紧张，又有一些不安，希望未来的我一直在做一个自由自在，勤奋善良的姑娘。
 
-一些作品和开源软件项目，👉 戳 [Portfolio](/portfolio)、[Github](http://github.com/huxpro)、[演说.io](http://https://zhuanlan.zhihu.com/p/21280918)。 
+曾经在上海的一家公司做前端实习，那段经历带给了我无限的成长，让我学到了不论是生活还是学习上的种种，虽然有难过，压力，但尽力最好。希望在不久的将来我可以找到我真正的归属！
 
 
-##### Talks
+##### Some
 
-- [Upgrading to Progressive Web Apps][9] · [JSConf CN 上海 2017](http://2017.jsconf.cn/)
+- 一个现在热爱健身的胖女孩
+- 一个热爱游泳一段时间的只会蛙泳的女孩
+- 一个曾经很man，现在可能还有的长发女孩
+- 一个一直喜欢独处，敲代码的女孩
+- 一个或许有些自卑的胖女孩
+- 一个笑起来很好看的女孩
+- 一个对于你们未知的女孩
+
+<!--- [Upgrading to Progressive Web Apps][9] · [JSConf CN 上海 2017](http://2017.jsconf.cn/)
 - Building Progressive Web Apps · [CSDI 广州 2017](http://www.csdisummit.com/)
 - The State of Progressive Web App · GDG IO Redux 北京 2017
 - 炒冷饭 · PWA 到底是个什么玩意？· Baidu HQ 北京 2017
@@ -18,8 +26,8 @@ Hey，我是黄玄，病毒种，进化程度不明，多出没于[博客](https
 - [Progressive Web App，复兴序章][4] · [QCon 上海 2016](http://2016.qconshanghai.com/presentation/3111)
 - Progressive Web App 之我见 · GDG IO Redux 北京 2016
 - [CSS Still Sucks 2015][2] · 2015
-- [JavaScript 模块化七日谈][1] · 2015
-
+- [JavaScript 模块化七日谈][1] · 2015-->
+<!--
 [1]: //huangxuan.me/2015/07/09/js-module-7day/
 [2]: //huangxuan.me/2015/12/28/css-sucks-2015/
 [3]: //huangxuan.me/2016/06/05/pwa-in-my-pov/
@@ -28,4 +36,4 @@ Hey，我是黄玄，病毒种，进化程度不明，多出没于[博客](https
 [6]: https://yanshuo.io/assets/player/?deck=58ac8598b123db0067292f92 "PWA Rehashing"
 [7]: https://yanshuo.io/assets/player/?deck=593ad6fbfe88c2006a0a0d6d "The State of PWA"
 [8]: https://yanshuo.io/assets/player/?deck=594d673d570c357d0698a950 "Building PWA"
-[9]: //huangxuan.me/jsconfcn2017/
+[9]: //huangxuan.me/jsconfcn2017/-->

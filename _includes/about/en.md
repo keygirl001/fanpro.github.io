@@ -1,16 +1,24 @@
 
 
-> Yet another man.
+> yeah,it's a girl.
 
 
-Hi, I am *@huxpro* (Huang, Xuan), a software engineer & a designer. I previously worked as Web Front-End Engineer at [Alibaba Trip](https://www.alitrip.com/); Web Front-End Infrastructure Team Lead at [Wepiao.com](https://www.crunchbase.com/organization/wepiao#/entity); And [Invited Consultant on PWA]((https://medium.com/elemefe/upgrading-ele-me-to-progressive-web-app-2a446832e509)) at [Ele.me](https://github.com/elemefe/).
+Hello, I am CaoFan, a not very clever girl, a front white & a student, I hope this personal blog will urge me to learn much about front and life.
 
-I studied Digital Media Art and graduated from [Communication University of China](https://en.wikipedia.org/wiki/Communication_University_of_China) by 2016, and will study Computer Science at [Rochester Institute of Technology](https://en.wikipedia.org/wiki/Rochester_Institute_of_Technology) in 2017.
+In the future, I will enter society, with excitement, tension, and some uneasy, hope I have been doing a free, hardworking girl all the time.
 
+I practiced in a company from Shanghai, that experience let me learn much whether it is life or learning, altought there are sad and pressure, but the best effort all. I hpoe in the near future that I can find my true attribution!
 
-##### Talks
+##### Some
 
-- [Upgrading to Progressive Web Apps][9] · [JSConf China Shanghai 2017](http://2017.jsconf.cn/)
+- A fat girl who loves fitness now
+- A girl who loves swimming for a while but only breaststroke
+- A girl who has been very man, and now there may be with      long hair
+- A girl who has always liked to be alone, and knocking code
+- A fat girl who may be some self-esteem
+- A nice girl with a nice smile
+- One for your unknown girl
+<!--- [Upgrading to Progressive Web Apps][9] · [JSConf China Shanghai 2017](http://2017.jsconf.cn/)
 - Building Progressive Web Apps · [CSDI Guangzhou 2017](http://www.csdisummit.com/)
 - The State of Progressive Web App · GDG IO Redux Beijing 2017
 - PWA Rehashing · Baidu HQ Beijing 2017
@@ -30,6 +38,6 @@ I studied Digital Media Art and graduated from [Communication University of Chin
 [6]: https://yanshuo.io/assets/player/?deck=58ac8598b123db0067292f92 "PWA Rehashing"
 [7]: https://yanshuo.io/assets/player/?deck=593ad6fbfe88c2006a0a0d6d "The State of PWA"
 [8]: https://yanshuo.io/assets/player/?deck=594d673d570c357d0698a950 "Building PWA"
-[9]: //huangxuan.me/jsconfcn2017/
+[9]: //huangxuan.me/jsconfcn2017/-->
 
 
