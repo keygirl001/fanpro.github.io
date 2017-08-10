@@ -4,7 +4,7 @@ title:     "打造简单的个人博客"
 subtitle:   " \"简单，笨笨的我\""
 date:       2017/08/06
 author:     "CaoFan"
-header-img: "img/"
+header-img: "img/first-article-bg.jpg"
 catalog: true
 tags:
   - 其他
