@@ -11,12 +11,19 @@ tags:
 
 ---
 
-# 前言
+>"markdown"
+
+
+
+## 前言
 
 对于markdowm来说，我很久之前就听说过，但是没有完整的读过文档自己学习过，今天我集中学习了一下，把自己的学习成果记录下来。以后有更多的学习体会，我会回来补充的，嘻嘻。
 
 
-# 正文
+<p id="build"></p>
+- - -
+
+## 正文
 
 markdown官方给出的是致力于使易于阅读和易于创作文档变得可行.（Markdown is intended to be as easy-to-read and easy-to-write as is feasible.），其实看了markdown的 [中文文档](https://markdown-zh.readthedocs.io/en/latest/) ，它的语法是比较简单掌握的。出于对一个知识掌握来总结一下它的优点和适用范围：  
 
@@ -126,7 +133,7 @@ markdown无法指定图片的尺寸。
 
 可以参考[这里](https://github.com/fex-team/dora/blob/master/doc/research.md), 对于前端的话，你可以使用里面的js库，直接引入就可以使用了，非常方便。  
 
-# 总结
+## 总结
 
 还有一些高级的用法，目前的自己还用不上，就先记笔记到这，自己这么写一遍感觉对它熟练了一圈，嘻嘻~
 
