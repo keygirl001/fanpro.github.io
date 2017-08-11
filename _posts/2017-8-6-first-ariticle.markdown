@@ -61,20 +61,16 @@ Fan Blog就这么样我拖拖拉拉的开始了，简直要被自己蠢死了！
   1. 主机记录：表示的是域名的前缀。  
 
   >www: 表示解析www.webcaofan.com   
-
-  >@: 表示解析webcaofan.com  
+  >@: 表示解析webcaofan.com   
 
   2. 记录类型   
 
   >A：表示域名指向一个ip地址。   
-
   >NS：表示域名服务器记录，DNSpod给我们提供了。   
-
   >CNAM: 表示该域名指向的另一个域名的ip地址。   
-
   >这里我们是需要利用github page, 所以我们A记录的ip地址指向的是你github的地址，CNAM填写的是xxx.github.io.,这里的xxx表示是你的github用户名。   
 
->这样的话，等待一段时间大概十几分钟到半个小时，你的域名就解析完成了，接下来我们就可以搭建你的blog了。
+>这样的话，等待一段时间大概十几分钟到半个小时，你的域名就解析完成了，接下来我们就可以搭建你的blog了。   
 
 
 ### 3.利用jekyll+github page搭建blog
