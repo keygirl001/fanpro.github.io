@@ -60,7 +60,8 @@ tags:
 对于我们前端开发人员来说，最主要的是与服务器的链接，因为我们有大量的数据需要传输
 首先我们要了解一下，最简单的提交数据的方式就是<form>表单，但是它的用户体验不好，每次提交都会刷新页面，所以后来就出现的ajax，无页面刷新。     
 
-##### 1.<form>表单中有一个属性metohd，它规定用于发送 form-data 的 HTTP 方法。两种方法：post，get，那他们有哪些区别呢？      
+##### 1.<form>表单  
+其中有一个属性metohd，它规定用于发送 form-data 的 HTTP 方法。两种方法：post，get，那他们有哪些区别呢？      
 
 > ① GET是使用URL或者cookie传参（用&符号连接参数）。   
   ② GET的URL会有长度上的限制，POST可以传输很多数据。     
@@ -84,8 +85,8 @@ tags:
 + 违背了url和资源定位的初衷。   
 
 3.AJAX两个重要的对象：    
-new XMLHttpRequest() 主流浏览器，     
-new ActiveXObject('Microsoft.XMLHTTP') IE6以下。      
++ new XMLHttpRequest() 主流浏览器，        
++ new ActiveXObject('Microsoft.XMLHTTP') IE6以下。         
 
 4.AJAX对象的三个重要的方法：      
 + .open('method', 'url', 'true') :建立和服务器的连接，method是传参的方式post或者get。url可以是相对地址也可以是绝对地址。第三个参数是选择同步还是异步，true为异步。     
@@ -93,15 +94,106 @@ new ActiveXObject('Microsoft.XMLHTTP') IE6以下。
 + .setRequestHeader('label', 'value')：把指定首部设置为提供的值，在设置任何首部之前必须调用open方法。     
 
 5.AJAX对象的一些属性：       
-+ onreadystatechange: 状态改变触发器
-+ readyState：对象的状态    
-0 代表初始化，此时已经创建了XMLHttpRequest对象。
-1 代表读取中，此时代码已经调用了open方法并且已经发送到服务器。
-2 代表已读取，open方法把一个请求发送到服务器，但是还没有收到。
-3 代表交互中，已经收到http响应头部信息，但是消息主体部分还没有完全接收。
-4 代表完成。      
-+ responseText 服务器返回数据的文本版本
-+ status 服务器返回的状态码
++ onreadystatechange: 状态改变触发器       
++ readyState：对象的状态       
+0 代表初始化，此时已经创建了XMLHttpRequest对象。       
+1 代表读取中，此时代码已经调用了open方法并且已经发送到服务器。      
+2 代表已读取，open方法把一个请求发送到服务器，但是还没有收到。      
+3 代表交互中，已经收到http响应头部信息，但是消息主体部分还没有完全接收。      
+4 代表完成。        
++ responseText 服务器返回数据的文本版本      
++ status 服务器返回的状态码       
+ 
+6.自己封装ajax：   
+    function Ajax(method, url, flag, calback, data) {
+      var xhr = null;
+      if(window.XMLHttpRequest) {
+        xhr = new window.XMLHttpRequest();
+      }else {
+        xhr = new ActiveXObject('Microsofot.XMLHTTP')
+      }
+      if(method === 'GET') {
+        xhr.open('GET', url + '?' + data, flag);
+        xhr.send();
+      }else if(method === "POST") {
+        xhr.open('POST', url, flag);
+        xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+        xhr.send(data);
+      }
+      xhr.onreadystatechange = function () {
+        if(xhr.readyState == 4) {
+          if(xhr.status == 200) {
+            callback(xhr.responseText);
+          }
+        }
+      }
+    }
+
+#### 3.HTTP协议简单了解   
+HTTP（HyperText Transfer Protocol）超文本传输协议，所有的www文件都必须遵守这个标准。    
+HTTPS（HyperText Transfer Protocol over Secure Socket Layer）,安全版的HTTP。  
+**主要特点：**     
+1.**支持客户端或者服务器端**      
+2.**简单快速**：客户端向服务器发送请求时，只需要传送请求方法和路径。常用方法：GET\HEAD\POST；由于HTTP协议简单，使得HTTP服务器规模小，通信速度快。     
+3.**灵活**：HTTP允许传输任意类型的数据。传输的数据类型由Content-type加以标记。    
+4.**无连接**：限制每次连接只处理一个请求。服务器处理完客户端的请求，收到应答后，即断开连接，这样可以节省传输时间。      
+5.**无状态**：指HTTP协议对于事务处理没有记忆能力。这意味着后期需要处理前期的信息，则必须重新传输，这样导致每次连接传输的数据量增大。另外当服务器不需要处理前期信息的时候应答就较快。     
+
+**HTTP通信报文**
+* 请求报文：   
+请求头: http://webcaofan.com/http_header     
+请求行：请求方法(GET,POST,HEAD,PUT,DELETE,OPTION) 请求url 协议版本 ；这个格式。       
+请求主体：对于表单提交数据（name=caofan&&age=21;）     
+[img](/img/in-post/internet-article/request.png)
+Accept: 请求报文域用于制定客户端接受哪些类型的信息。    
+Accept-language：指定一种自然语言。    
+Referer: 用来表示从哪儿链接到目前的网页。    
+User-Agent：用来互殴浏览器的名称和版本。      
+Cotent-type：传输数据的类型。     
+HOST：用于指定被请求资源的网络主机和端口号。   
+Content-length：指明主体的长度，以字节方式储存的十进制数字来表示。     
+Connection： 决定当前事务完成后，是否会关闭网络连接，'keep-alive表示永久连接'。       
+Cache-Control: 是否支持缓存。   
+
+
+* 响应报文：    
+响应头：http://webcaofan.com/http_header     
+响应行：响应协议版本号(HTTP/1.1) 响应状态码(200) 响应状态文字(OK)     
+响应主体：'成功'     
+[img](/img/in-post/internet-article/answer.png)     
+Server：包含了服务器用来处理请求的软件信息。     
+Date：表示消息的生产日期和时间。     
+transfer-encoding ：chunked表示报文采用了分块编码。     
+
+**HTTP常见的状态码**   
+| 状态码 | 定义 | 说明 |
+| :--- | :----  | :---- |
+| 1XX | 信息      | 接收到请求继续处理|
+| 2XX | 成功      | 成功收到，接受|
+| 3XX | 重定向    | 为了完成请求需要进行另一种措施(如从浏览器缓存获取资源，或者跳转到其他页面)|
+| 4XX | 客户端错误 | 请求语法有错误，不能完全符合|
+| 5XX | 服务器错误 | 服务器无法完成请求|
+    
+#### 4.客户端和服务器之间如何通信   
+_首先当你在浏览器中输入一个url会发生什么？_       
+简单来说就是：      
+1.浏览器通过DNS域名解析成ip地址。     
+2.浏览器通过TCP协议建立与服务器TCP连接(三次握手，四次挥手)。        
+3.浏览器向服务器端发送HTTP协议包，请求服务器里的资源文档。        
+4.服务器向浏览器端发送HTTP协议应答包。       
+5.浏览器和服务器端断开连接，客户端开始解析html文档。      
+
+> **三次握手：**    
+  1.首先客户端(浏览器端)发送连接请求报文。      
+  2.服务器端接受后回复ACK报文，并为这次连接分配资源。     
+  3.客户端接收到ACK报文后也向服务器端发送ACK报文，并分配资源，这样就建立了TCP连接。       
+  **四次挥手:**
+  1.客户端发送FIN报文给服务器端，发起中断请求，这时候客户端已没有数据给服务器端了，如果服务器端还有数据可以继续发送。       
+  2.服务器端发送ACK报文，接受到客户端的请求了，还在准备，请继续等待。      
+  3.当服务器端确定数据已发送完成，则向客户端发送FIN报文，表示所有数据全部发送完成了，可以关闭连接了。     
+  4.客户端收到FIN报文后，发送ACK报文，进入等待状态，服务器端收到ACK报文后断开连接，客户端等待2ms后，没有收到回复，即关闭连接。
+
+#### 5.浏览器的缓存机制   
 
 
 
