@@ -58,15 +58,18 @@ tags:
 + TCP/IP协议族内预存了各类通用的应用服务。比如，FTP（File Transfer Protocol，文件传输协议）和DNS（Domain Name System，域名系统）服务就是其中的两类。HTTP协议也处于该层。   
 #### 前端需要更加了解的点  
 对于我们前端开发人员来说，最主要的是与服务器的链接，因为我们有大量的数据需要传输
-首先我们要了解一下，最简单的提交数据的方式就是<form>表单，但是它的用户体验不好，每次提交都会刷新页面，所以后来就出现的ajax，无页面刷新。
+首先我们要了解一下，最简单的提交数据的方式就是<form>表单，但是它的用户体验不好，每次提交都会刷新页面，所以后来就出现的ajax，无页面刷新。     
+
 ##### 1.<form>表单中有一个属性metohd，它规定用于发送 form-data 的 HTTP 方法。两种方法：post，get，那他们有哪些区别呢？      
+
 > ① GET是使用URL或者cookie传参（用&符号连接参数）。   
   ② GET的URL会有长度上的限制，POST可以传输很多数据。     
   ③ 根据第一条来看，POST比GET相对安全。      
   补充：     
   但是其实对于HTTP协议来说，并没有规定POST的数据就要放到BODY里面，也没有规定GET数据一定要放到URL里面；同时也没有对它们传输数据的长度进行限制，两方面原因造成了这些：   
   1）早期浏览器会对URL长度进行限制，所以导致了GET数据的限制。     
-  2）浏览器会对Content-lengt进行限制，这是为了服务器安全和稳定。     
+  2）浏览器会对Content-lengt进行限制，这是为了服务器安全和稳定。    
+
 ##### 2.AJAX(Asynchronous javascript and xml)：用javascript以异步的形式操作xml/json。     
 1.优点：   
 + 页面无刷新，在页面内与服务器进行通信，用户体验好。     
@@ -80,12 +83,14 @@ tags:
 + 安全问题。     
 + 违背了url和资源定位的初衷。   
 
-3.AJAX两个重要的对象： new XMLHttpRequest() 主流浏览器， new ActiveXObject('Microsoft.XMLHTTP') IE6以下。      
+3.AJAX两个重要的对象：    
+new XMLHttpRequest() 主流浏览器，     
+new ActiveXObject('Microsoft.XMLHTTP') IE6以下。      
 
 4.AJAX对象的三个重要的方法：      
-.open('method', 'url', 'true') :建立和服务器的连接，method是传参的方式post或者get。url可以是相对地址也可以是绝对地址。第三个参数是选择同步还是异步，true为异步。     
-.send(data)：向服务器发送请求。      
-.setRequestHeader('label', 'value')：把指定首部设置为提供的值，在设置任何首部之前必须调用open方法。     
++ .open('method', 'url', 'true') :建立和服务器的连接，method是传参的方式post或者get。url可以是相对地址也可以是绝对地址。第三个参数是选择同步还是异步，true为异步。     
++ .send(data)：向服务器发送请求。      
++ .setRequestHeader('label', 'value')：把指定首部设置为提供的值，在设置任何首部之前必须调用open方法。     
 
 5.AJAX对象的一些属性：       
 + onreadystatechange: 状态改变触发器
