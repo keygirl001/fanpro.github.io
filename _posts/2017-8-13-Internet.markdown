@@ -144,7 +144,7 @@ HTTPS（HyperText Transfer Protocol over Secure Socket Layer）,安全版的HTTP
 请求头: http://webcaofan.com/http_header     
 请求行：请求方法(GET,POST,HEAD,PUT,DELETE,OPTION) 请求url 协议版本 ；这个格式。       
 请求主体：对于表单提交数据（name=caofan&&age=21;）     
-[img](/img/in-post/internet-article/request.png)
+![img](/img/in-post/internet-article/request.png)
 Accept: 请求报文域用于制定客户端接受哪些类型的信息。    
 Accept-language：指定一种自然语言。    
 Referer: 用来表示从哪儿链接到目前的网页。    
@@ -160,7 +160,7 @@ Cache-Control: 是否支持缓存。
 响应头：http://webcaofan.com/http_header     
 响应行：响应协议版本号(HTTP/1.1) 响应状态码(200) 响应状态文字(OK)     
 响应主体：'成功'     
-[img](/img/in-post/internet-article/answer.png)     
+![img](/img/in-post/internet-article/answer.png)     
 Server：包含了服务器用来处理请求的软件信息。     
 Date：表示消息的生产日期和时间。     
 transfer-encoding ：chunked表示报文采用了分块编码。     
