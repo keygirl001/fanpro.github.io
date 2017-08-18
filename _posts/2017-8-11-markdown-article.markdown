@@ -76,7 +76,8 @@ again balabalabala
 #### 4.代码块  
 
 只需要将每一行都缩进4个空格，或者一个tab(对于tab设置为2个空格的人那就是两个喽)。   
-效果：  
+效果：    
+
     function test() {
       return markdown;
     }

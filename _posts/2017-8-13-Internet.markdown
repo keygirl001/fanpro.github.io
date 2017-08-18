@@ -160,7 +160,7 @@ Cache-Control: 是否支持缓存。
 响应头：http://webcaofan.com/http_header        
 响应行：响应协议版本号(HTTP/1.1) 响应状态码(200) 响应状态文字(OK)        
 响应主体：'成功'       
-![img](/img/in-post/internet-article/answer.png)         
+![img](/img/in-post/internet-article/answer.png)  
 Server：包含了服务器用来处理请求的软件信息。       
 Date：表示消息的生产日期和时间。       
 transfer-encoding ：chunked表示报文采用了分块编码。      
