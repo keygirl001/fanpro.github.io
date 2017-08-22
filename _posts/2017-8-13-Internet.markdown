@@ -128,6 +128,17 @@ tags:
       }
     }
 
+7.补充：ajax各浏览器中申请本地资源的区别。        
+由于浏览器安全问题：
+>1) js不允许访问本地文件       
+2) ajax请求也不能访问跨域的页面       
+3) firefox下端口不一致也会导致跨域         
+
+不同浏览器对ajax访问本地文件的支持：       
+> 1) webkit核心的浏览器：如Chrome，只能访问自己（或者可以访问其他域名的页面，此页面设置过Access-Control-Allow-Origin=*响应头允许跨域请求），无法访问其他本地资源。ajax.html只请求能访问ajax.html，不能请求同文件夹下的其他文件及上级目录下的文件。       
+2) Gecko核心的浏览器：如firefox，可以访问同级目录下的所有文件和子文件，但是不能访问上一级目录的文件。否则会报“Access to restricted URI denied”的错误。           
+3) trident核心的浏览器：如IE，不能使用XMLHttpRequest,使用ActiveXObject创建的ajax对象则没有限制。      
+
 #### 3.HTTP协议简单了解    
 HTTP（HyperText Transfer Protocol）超文本传输协议，所有的www文件都必须遵守这个标准。    
 HTTPS（HyperText Transfer Protocol over Secure Socket Layer）,安全版的HTTP。  
