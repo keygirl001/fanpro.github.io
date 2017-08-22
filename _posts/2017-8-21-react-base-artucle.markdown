@@ -59,9 +59,8 @@ React中最重要的是虚拟Dom机制，它使得我们可以不用大量操作
 
 * **列节点的比较：允许开发者对同一层级的子节点，通过唯一的key值进行区分，大大提高了性能。**       
 diff算法对于列节点提供了三种操作：插入、移动、删除。     
+      
 
-    //插入          
-    
     function enqueueInsertMarkup(parentInst, markup, toIndex) {
       updateQueue.push({
         parentInst: parentInst,
@@ -72,8 +71,7 @@ diff算法对于列节点提供了三种操作：插入、移动、删除。
         fromIndex: null,
         toIndex: toIndex,
       });
-    }
-    //移动
+    }          //插入
     function enqueueMove(parentInst, fromIndex, toIndex) {
       updateQueue.push({
         parentInst: parentInst,
@@ -84,8 +82,7 @@ diff算法对于列节点提供了三种操作：插入、移动、删除。
         fromIndex: fromIndex,
         toIndex: toIndex,
       });
-    }
-    //删除
+    }         //移动
     function enqueueRemove(parentInst, fromIndex) {
       updateQueue.push({
         parentInst: parentInst,
@@ -96,7 +93,7 @@ diff算法对于列节点提供了三种操作：插入、移动、删除。
         fromIndex: fromIndex,
         toIndex: null,
       });
-    }
+    }         //删除
 
     分析一下源码：
 
@@ -143,29 +140,24 @@ diff算法对于列节点提供了三种操作：插入、移动、删除。
       }
       this._renderedChildren = nextChildren;
     },
-    // 移动节点
     moveChild: function(child, toIndex, lastIndex) {
       if (child._mountIndex < lastIndex) {
         this.prepareToManageChildren();
         enqueueMove(this, child._mountIndex, toIndex);
       }
-    },
-    // 创建节点
+    },          // 移动节点
     createChild: function(child, mountImage) {
       this.prepareToManageChildren();
       enqueueInsertMarkup(this, mountImage, child._mountIndex);
-    },
-    // 删除节点
+    },          // 创建节点
     removeChild: function(child) {
       this.prepareToManageChildren();
       enqueueRemove(this, child._mountIndex);
-    },
-
+    },          // 删除节点
     _unmountChild: function(child) {
       this.removeChild(child);
       child._mountIndex = null;
     },
-
     _mountChildAtIndex: function(
       child,
       index,
