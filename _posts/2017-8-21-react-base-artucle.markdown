@@ -55,30 +55,10 @@ React中最重要的是虚拟Dom机制，它使得我们可以不用大量操作
 ![img](/img/in-post/react-base-article/diff-second.png)   
 通过逐层比较发现，Dcomponent变为了Gcomponent，即使这两个component结构相似但是如果判断为不同类型的componet，React就会直接删除Dcomponent，重新创建Gcomponent以及它的子节点。   
 
-* **相同类型，不同属性的节点：这个就比较简单了即重新设置属性即可。对于虚拟DOM来说，style的属性值不是简单的字符串而是一个对象。**         
-
-* **列节点的比较：允许开发者对同一层级的子节点，通过唯一的key值进行区分，大大提高了性能。**       
-diff算法对于列节点提供了三种操作：插入、移动、删除。     
-
-
-    updateChildren: function(nextNestedChildrenElements, transaction, context) {
-      //通过updateDepth来表示树的层级
-      updateDepth++;
-      var errorThrown = true;
-      try {
-        this._updateChildren(nextNestedChildrenElements, transaction, context);
-        errorThrown = false;
-      } finally {
-        updateDepth--;
-        if (!updateDepth) {
-          if (errorThrown) {
-            clearQueue();
-          } else {
-            processQueue();
-          }
-        }
-      }
-    }
+**相同类型，不同属性的节点：这个就比较简单了即重新设置属性即可。对于虚拟DOM来说，style的属性值不是简单的字符串而是一个对象。**      
+   
+**列节点的比较：允许开发者对同一层级的子节点，通过唯一的key值进行区分，大大提高了性能。**        
+diff算法对于列节点提供了三种操作：插入、移动、删除。                 
 
     
     function enqueueInsertMarkup(parentInst, markup, toIndex) {
