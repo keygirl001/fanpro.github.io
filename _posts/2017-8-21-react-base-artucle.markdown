@@ -60,6 +60,26 @@ React中最重要的是虚拟Dom机制，它使得我们可以不用大量操作
 * **列节点的比较：允许开发者对同一层级的子节点，通过唯一的key值进行区分，大大提高了性能。**       
 diff算法对于列节点提供了三种操作：插入、移动、删除。     
 
+
+    updateChildren: function(nextNestedChildrenElements, transaction, context) {
+      //通过updateDepth来表示树的层级
+      updateDepth++;
+      var errorThrown = true;
+      try {
+        this._updateChildren(nextNestedChildrenElements, transaction, context);
+        errorThrown = false;
+      } finally {
+        updateDepth--;
+        if (!updateDepth) {
+          if (errorThrown) {
+            clearQueue();
+          } else {
+            processQueue();
+          }
+        }
+      }
+    }
+
     
     function enqueueInsertMarkup(parentInst, markup, toIndex) {
       updateQueue.push({
