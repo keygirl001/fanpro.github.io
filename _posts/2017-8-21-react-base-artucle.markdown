@@ -31,8 +31,8 @@ React中最重要的是虚拟Dom机制，它使得我们可以不用大量操作
 ![img](/img/in-post/react-base-article/diff-first.png)    
 
     updateChildren: function(nextNestedChildrenElements, transaction, context) {
-      
-      updateDepth++;//通过updateDepth来表示树的层级
+      //通过updateDepth来表示树的层级
+      updateDepth++;
       var errorThrown = true;
       try {
         this._updateChildren(nextNestedChildrenElements, transaction, context);
@@ -59,8 +59,8 @@ React中最重要的是虚拟Dom机制，它使得我们可以不用大量操作
 
 * **列节点的比较：允许开发者对同一层级的子节点，通过唯一的key值进行区分，大大提高了性能。**       
 diff算法对于列节点提供了三种操作：插入、移动、删除。     
-      
 
+    
     function enqueueInsertMarkup(parentInst, markup, toIndex) {
       updateQueue.push({
         parentInst: parentInst,
@@ -95,7 +95,9 @@ diff算法对于列节点提供了三种操作：插入、移动、删除。
       });
     }         //删除
 
+
     分析一下源码：
+
 
     _updateChildren: function(nextNestedChildrenElements, transaction, context) {
       var prevChildren = this._renderedChildren;  //老集合
@@ -177,10 +179,14 @@ diff算法对于列节点提供了三种操作：插入、移动、删除。
 实例：       
 ![img](/img/in-post/react-base-article/diff-third.png)   
 根据源码我们要先遍历新的集合       
-+ 遍历到B，判断一下老集合中也有相同的B节点，有相同的B节点，我们要执行moveChild，在老集合中B.\_mounthIndex = 1，此时的lastIndex = 0，不满足条件，更新lastIndex = 1，更新B在新集合中的位置B._mountIndex = 0，nextIndex = 1判断下一个节点;      
++ 遍历到B，判断一下老集合中也有相同的B节点，有相同的B节点，我们要执行moveChild，在老集合中B.\_mounthIndex = 1，此时的lastIndex = 0，不满足条件，更新lastIndex = 1，更新B在新集合中的位置B._mountIndex = 0，nextIndex = 1判断下一个节点; 
+
 + 遍历到E，判断老集合中没有E节点，执行this.\_mountChildAtIndex，创建新节点E，更新E在新集合中的位置E._mountIndex = 1，nextIndex = 2判断下一个节点;      
+
 + 遍历到C，判断一下老集合中也存在C节点，执行moveChild，在老集合中C.\_mounthIndex = 2，lastInde = 1，不满足，更新lastIndex = 2，更新C在新集合中的位置C.\_mounthIndex = 2，nextIndex = 3判断下一个节点；     
+
 + 遍历到A，判断一下老集合中也存在A节点，执行moveChild，在老集合中A.\_mounthIndex = 0，lastIndex = 2，满足A.\_mounthIndex < lastIndex，所以要对A进行移动操作，更新lastIndex = 2，更新A在新集合中的位置A.\_mounthIndex = 3，nextIndex = 4进入下一个节点；        
+
 + 最后要遍历老集合，判断是否存在在新集合中没有但在老集合中存在的节点，发现D节点，所以接下来删除D节点，diff算法完成。
 
 
