@@ -31,8 +31,8 @@ React中最重要的是虚拟Dom机制，它使得我们可以不用大量操作
 ![img](/img/in-post/react-base-article/diff-first.png)    
 
     updateChildren: function(nextNestedChildrenElements, transaction, context) {
-      //通过updateDepth来表示树的层级
-      updateDepth++;
+      
+      updateDepth++;//通过updateDepth来表示树的层级
       var errorThrown = true;
       try {
         this._updateChildren(nextNestedChildrenElements, transaction, context);
