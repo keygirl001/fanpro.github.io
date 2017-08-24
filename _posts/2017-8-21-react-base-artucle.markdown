@@ -200,8 +200,8 @@ diff算法对于列节点提供了三种操作：插入、移动、删除。
 + 最后要遍历老集合，判断是否存在在新集合中没有但在老集合中存在的节点，发现D节点，所以接下来删除D节点，diff算法完成。
 
 ### 组件的生命周期（Component Lifecycle）      
- **初始化阶段**（顺序执行）：        
-getDeafultProps():获取实例的默认属性，react.createClass()初始化组件，自定义组件的入口方法，负责管理getDeafultProps(),并且只执行一次。                 
+#### **初始化阶段**（顺序执行）：        
+_getDeafultProps()_:获取实例的默认属性，`react.createClass()`初始化组件，自定义组件的入口方法，负责管理`getDeafultProps()`,并且只执行一次。                 
 
     createClass: function (spec) {
       var Constructor = function (props, context, updater) {
@@ -250,10 +250,10 @@ getDeafultProps():获取实例的默认属性，react.createClass()初始化组�
 其中`getDefaultProps()`是通过`Constructor`管理的，所以它在react整个生命周期中只会执行一次，并且初始化的实例都会共享`defaultProps`。 
 
 
-getInitialState()：创建组件实例对象的时候调用它来获取初始化的state。 
-componentWillMount()：执行它时不会重新触发render函数，但是可以调用setState来修改state的值，并进行合并。        
-render()：生成虚拟DOM节点，只能访问，不能修改状态和DOM。        
-componentDidMount()：真实Dom被渲染之后调用，如发送ajax，定时器设置。      
+_getInitialState()_：创建组件实例对象的时候调用它来获取初始化的state。 
+_componentWillMount()_：执行它时不会重新触发render函数，但是可以调用setState来修改state的值，并进行合并。        
+_render()_：生成虚拟DOM节点，只能访问，不能修改状态和DOM。        
+_componentDidMount()_：真实Dom被渲染之后调用，如发送ajax，定时器设置。      
 
     var ReactCompositeComponent = {
       /**
@@ -389,12 +389,12 @@ componentDidMount()：真实Dom被渲染之后调用，如发送ajax，定时器
 `mountComponent`负责管理生命周期中的`getInitial`、`componentWillMount`、`render`、`componentDidMount`; `ReactCompositeComponent`自定义组件类。     
 首先将实例对象的`props`、`state`、队列等初始化，然后调用`performInitialMount`挂载组件，这里有个容错，如果存在`componentWillMount`，则执行(如果此时在`componentWillMount`中调用`setSate`,是不会重新触发`render`，而是自动合并`state`)，完成挂载后调用`componentDidMount`。       
 
-**更新执行阶段**(顺序执行)       
-componentWillReceiveProps(nextProps, nextContext)：组件接收到新的props时调用。           
-shouldComponentUpdate(nextProps, nextState, nextContext)：接受到新的props和state，判断是否需要渲染，渲染前调用。        
-componentWillUpdate(nextProps, nextState, nextContext)：接受到新的props和state，渲染前调用。    
-render()。                             
-componentDidUpdate(prevProps, prevState, prevContext)：组件渲染后，更新到Dom之后调用。       
+#### **更新执行阶段**(顺序执行)       
+_componentWillReceiveProps(nextProps, nextContext)_：组件接收到新的props时调用。           
+_shouldComponentUpdate(nextProps, nextState, nextContext)_：接受到新的props和state，判断是否需要渲染，渲染前调用。        
+_componentWillUpdate(nextProps, nextState, nextContext)_：接受到新的props和state，渲染前调用。    
+_render()_。                             
+_componentDidUpdate(prevProps, prevState, prevContext)_：组件渲染后，更新到Dom之后调用。       
 
     var ReactCompositeComponent = {
       /**
@@ -570,12 +570,13 @@ componentDidUpdate(prevProps, prevState, prevContext)：组件渲染后，更新
     }
 
 如果存在`componentDidUpdate`则需要将`state`、`props`和`context`进行复制备份。
-调用`shouldComponentUpdate`判断组件是否需要更新，如果需要更新，存在`componentWillUpdate`，执行，递归调用；如果返回false，组件中的`props`和`state`也都会被更新(如果调用了`forceUpdate`函数的话，会跳过`shouldComponnetUpdate`的判断过程)；`render`之后，若存在`componnetDidUpdate`，则调用执行，并将更新前的数据当作参数返回出来。     
-_注意_：
-> 我们不能在`shouldComponent`和`componentWillUpdate`中调用`setState`,如果调用了则会导致再次调用`updateComponent`，会导致循环调用，直到浏览器内存崩溃。        
+调用`shouldComponentUpdate`判断组件是否需要更新，如果需要更新，存在`componentWillUpdate`，执行，递归调用；如果返回false，组件中的`props`和`state`也都会被更新(如果调用了`forceUpdate`函数的话，会跳过`shouldComponnetUpdate`的判断过程)；`render`之后，若存在`componnetDidUpdate`，则调用执行，并将更新前的数据当作参数返回出来。    
 
-**组件卸载**      
-componnetWillUnmount()：销毁组件。    
+* 注意：
+> 我们不能在 `shouldComponent` 和 `componentWillUpdate` 中调用 `setState` ,如果调用了则会导致再次调用 `updateComponent` ，会导致循环调用，直到浏览器内存崩溃。        
+
+#### **组件卸载**      
+_componnetWillUnmount()_：销毁组件。    
 
     unmountComponent: function(safely) {
       if (!this._renderedComponent) {
