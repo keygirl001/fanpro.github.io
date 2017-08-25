@@ -27,7 +27,7 @@ React中最重要的是虚拟Dom机制，它使得我们可以不用大量操作
   两个相同组件产生类似的DOM结构，不同的组件产生不同的DOM结构。        
   对于同一层级的子节点，它们可以通过唯一的id进行区分。      
 
-1 对于两棵树的比较只会对同一层的节点进行比较，彻底简化了复杂度。如下图，只会循环一次对每一层进行比较，如果发现节点不存在，则会把该节点和其子节点完全删除。 
+1 **对于两棵树的比较只会对同一层的节点进行比较，彻底简化了复杂度**。如下图，只会循环一次对每一层进行比较，如果发现节点不存在，则会把该节点和其子节点完全删除。 
 ![img](/img/in-post/react-base-article/diff-first.png)    
 
     updateChildren: function(nextNestedChildrenElements, transaction, context) {
@@ -200,7 +200,7 @@ diff算法对于列节点提供了三种操作：插入、移动、删除。
 + 最后要遍历老集合，判断是否存在在新集合中没有但在老集合中存在的节点，发现D节点，所以接下来删除D节点，diff算法完成。
 
 ### 组件的生命周期（Component Lifecycle）      
-#### **初始化阶段**（顺序执行）：        
+#### **初始化阶段**（顺序执行）        
 _getDeafultProps()_:获取实例的默认属性，`react.createClass()`初始化组件，自定义组件的入口方法，负责管理`getDeafultProps()`,并且只执行一次。                 
 
     createClass: function (spec) {
@@ -622,6 +622,226 @@ _componnetWillUnmount()_：销毁组件。
 
 `unmountComponent`负责管理生命周期中的`componentWillUnmount`。如果在`componentWillUnmount`中调用`setState`，是不会重新触发render的。
 
+### react组件实例的创建、组件插入dom       
+#### react组件实例的创建     
+_React.createClass_方法用于生成一个组件的实例。在前面的组件生命周期里面`getDefaultProps`就在`createClass`里面出现，我们简答介绍一下源码的部分内容：             
++ 定义了构造函数Constructor，构造函数的prototype指向了一个ReactClassComponent的实例。                   
+    Constructor.prototype = new ReactClassComponent();          
++ 在Constructor原型上定义了一个`\_reactAutoBindPairs`的空数组，我们自定义的方法按照[key,content,key,content,...]的方法存在了`\_reactAutoBindPairs`里面，为了组件实例化的时候直接绑定到实例上，并且避免了react官方制定的方法也被绑定到实例上。       
++ 调用了`getDefaultProps`，并且把值放到defaultProps类变量上。                
++ 我们创建一个组件自定义的方法都在`ReactClassInterface`上有，当前未定义的方法设置为空。     
 
+    for (var methodName in ReactClassInterface) {
+        if (!Constructor.prototype[methodName]) {
+          Constructor.prototype[methodName] = null;
+        }
+      }    
++ 在构造函数里主要做了两件事，一就是把__reactAutoBindPairs的内容取出来，自动绑定到实例上；二就是初始化一些参数，调用`getInitialState()`，返回sate的值。        
 
+    var Constructor = function (props, context, updater) {
+      // 触发自动绑定
+      if (this.__reactAutoBindPairs.length) {
+        bindAutoBindMethods(this);
+      }
 
+      // 初始化参数
+      this.props = props;
+      this.context = context;
+      this.refs = emptyObject;  // 本组件对象的引用，可以利用它来调用组件的方法
+      this.updater = updater || ReactNoopUpdateQueue;
+
+      // 调用getInitialState()来初始化state变量
+      this.state = null;
+      var initialState = this.getInitialState ? this.getInitialState() : null;
+      this.state = initialState;
+    };
+
+#### 组件插入dom
+_ReactDom.render()_方法用于插入dom元素。            
+
+    ReactDom.render(
+      <p>插入dom元素</p>,
+      document.getElementById('root')         //id为root的为一个根节点
+    ); 
+
+上述代码经过babel转义过来就是：
+
+    ReactDom.render(
+      // React.createElement(type, config, children)
+      React.createElement('p', '插入dom元素'),
+      document.getElementById('root')
+    )
+
+**ReactElement()** `ReactElement`就是我们常说的虚拟dom。首先我们来看一下`ReactElement`的源码：       
+
+    var ReactElement = function(type, key, ref, self, source, owner, props) {
+      var element = {
+        // This tag allow us to uniquely identify this as a React Element
+        $$typeof: REACT_ELEMENT_TYPE,
+        // Built-in properties that belong on the element
+        type: type,
+        key: key,
+        ref: ref,
+        props: props,
+        // Record the component responsible for creating this element.
+        _owner: owner,
+      };
+      return element;
+    };
+
+在mountComponent()挂载组件中，会进行组件渲染，调用到`instantiateReactComponent()`方法。`instantiateReactComponent()`会根据`ReactElement`中不同type，创建不同类型的组件对象。           
+
+    // 初始化组件对象，node是一个ReactElement对象，是节点元素在React中的表示
+    function instantiateReactComponent(node) {
+      var instance;
+
+      var isEmpty = node === null || node === false;
+      if (isEmpty) {
+        // 空对象
+        instance = ReactEmptyComponent.create(instantiateReactComponent);
+      } else if (typeof node === 'object') {
+        // 组件对象，包括DOM原生的和React自定义组件
+        var element = node;
+
+        // 根据ReactElement中的type字段区分
+        if (typeof element.type === 'string') {
+          // type为string则表示DOM原生对象，比如div span等。
+          instance = ReactNativeComponent.createInternalComponent(element);
+        } else if (isInternalComponentType(element.type)) {
+          // 保留给以后版本使用，此处暂时不会涉及到
+          instance = new element.type(element);
+        } else {
+          // React自定义组件
+          instance = new ReactCompositeComponentWrapper(element);
+        }
+      } else if (typeof node === 'string' || typeof node === 'number') {
+        // 元素是一个string时，对应的比如<span>123</span> 中的123
+        // 本质上它不是一个ReactElement，但为了统一，也按照同样流程处理，称为ReactDOMTextComponent
+        instance = ReactNativeComponent.createInstanceForText(node);
+      } else {
+        // 无处理
+      }
+
+      // 初始化参数，这两个参数是DOM diff时用到的
+      instance._mountIndex = 0;
+      instance._mountImage = null;
+
+      return instance;
+    }
+
+**createElement()**`createElement()`创建React元素节点    
+
+    ReactElement.createElement = function(type, config, children) {
+      var propName;
+
+      // 初始化参数
+      var props = {};
+
+      var key = null;
+      var ref = null;
+      var self = null;
+      var source = null;
+      //从config中提取出ref，key，self，source等属性
+      if (config != null) {
+        if (hasValidRef(config)) {
+          ref = config.ref;
+        }
+        if (hasValidKey(config)) {
+          key = '' + config.key;
+        }
+
+        self = config.__self === undefined ? null : config.__self;
+        source = config.__source === undefined ? null : config.__source;
+        // 从config中取出属性放到新的props对象中
+        for (propName in config) {
+          if (
+            hasOwnProperty.call(config, propName) &&
+            !RESERVED_PROPS.hasOwnProperty(propName)
+          ) {
+            props[propName] = config[propName];
+          }
+        }
+      }
+
+      // 传过来的children被放在了props的children属性下
+      // 传入的参数前两个为type和config，所以要减2
+      var childrenLength = arguments.length - 2;
+      if (childrenLength === 1) {
+        //如果只有一个时，直接放到props.children下
+        props.children = children;
+      } else if (childrenLength > 1) {
+        // 不止一个的时候以array的方式存放到props.children下
+        var childArray = Array(childrenLength);
+        for (var i = 0; i < childrenLength; i++) {
+          childArray[i] = arguments[i + 2];
+        }
+        props.children = childArray;
+      }
+
+      // 静态变量defaultProps，属性设置默认值
+      if (type && type.defaultProps) {
+        var defaultProps = type.defaultProps;
+        for (propName in defaultProps) {
+          if (props[propName] === undefined) {
+            props[propName] = defaultProps[propName];
+          }
+        }
+      }
+      //返回ReactElement对象
+      return ReactElement(
+        type,
+        key,
+        ref,
+        self,
+        source,
+        ReactCurrentOwner.current,
+        props,
+      );
+    };
+
+ReactDOM.render()实际上是调用ReactMount.render()；接着调用ReactMount.\_renderSubtreeIntoContainer，在这里面调用\_renderNewRootComponent并生成一个ReactCompositeComponentWrapper并返回。                
+
+`_renderSubtreeIntoContainer()`源码：      
+
+    _renderSubtreeIntoContainer: function (parentComponent, nextElement, container, callback) {
+        callback = callback === undefined ? null : callback;
+        // 包装ReactElement，将nextElement挂载到wrapper的props属性下，这段代码不是很关键
+        var nextWrappedElement = ReactElement(TopLevelWrapper, null, null, null, null, null, nextElement);
+        // 获取要插入到的容器的前一次的ReactComponent，这是为了做DOM diff
+        // 对于ReactDOM.render()调用，prevComponent为null
+        var prevComponent = getTopLevelWrapperInContainer(container);
+
+        if (prevComponent) {
+          // 从prevComponent中获取到prevElement这个数据对象。一定要搞清楚ReactElement和ReactComponent的 作用，他们很关键
+          var prevWrappedElement = prevComponent._currentElement;
+          var prevElement = prevWrappedElement.props;
+          // DOM diff精髓，同一层级内，type和key不变时，只用update就行。否则先unmount组件再mount组件
+          // 这是React为了避免递归太深，而做的DOM diff前提假设。它只对同一DOM层级，type相同，key(如果有)相同的组件做DOM diff，否则不用比较，直接先unmount再mount。这个假设使得diff算法复杂度从O(n^3)降低为O(n).
+          if (shouldUpdateReactComponent(prevElement, nextElement)) {
+            var publicInst = prevComponent._renderedComponent.getPublicInstance();
+            var updatedCallback = callback && function () {
+              callback.call(publicInst);
+            };
+            // 只需要update，调用_updateRootComponent，然后直接return了
+            ReactMount._updateRootComponent(prevComponent, nextWrappedElement, container, updatedCallback);
+            return publicInst;
+          } else {
+            // 不做update，直接先卸载再挂载。即unmountComponent,再mountComponent。mountComponent在后面代码中进行
+            ReactMount.unmountComponentAtNode(container);
+          }
+        }
+
+        var reactRootElement = getReactRootElementInContainer(container);
+        var containerHasReactMarkup = reactRootElement && !!internalGetID(reactRootElement);
+        var containerHasNonRootReactChild = hasNonRootReactChild(container);
+
+        var shouldReuseMarkup = containerHasReactMarkup && !prevComponent && !containerHasNonRootReactChild;
+        // 初始化，渲染组件，然后插入到DOM中。_renderNewRootComponent很关键，后面详细分析
+        var component = ReactMount._renderNewRootComponent(nextWrappedElement, container, shouldReuseMarkup, parentComponent != null ? parentComponent._reactInternalInstance._processChildContext(parentComponent._reactInternalInstance._context) : emptyObject)._renderedComponent.getPublicInstance();
+        // render方法中带入的回调，ReactDOM.render()调用时一般不传入
+        if (callback) {
+          callback.call(component);
+        }
+        return component;
+      },
+    }
