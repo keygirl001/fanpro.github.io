@@ -1,6 +1,6 @@
 ---
 layout:    post
-title:     "React"
+title:     "React源码学习"
 subtitle:   " \"重点react diff和生命周期\""
 date:       2017/08/21
 author:     "CaoFan"
