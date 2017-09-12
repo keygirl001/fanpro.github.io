@@ -4,7 +4,7 @@ title:     "js基本类型及其方法"
 subtitle:   " \"js基础知识"\""
 date:       2017/09/11
 author:     "CaoFan"
-header-img: "img/arr-object-func.png"
+header-img: "/img/arr-object-func.png"
 catalog: true
 tags:
   - javascript
@@ -62,8 +62,7 @@ tags:
     })    
 
   结果：   
-  ![img](img/in-post/arr-object-func/arr-foreach1.png)     
-
+![img](/img/in-post/arr-object-func/arr-foreach1.png)     
 array.forEach(callback,[thisObject]),第一个参数为回掉函数，第二个参数表示可以改变this指向。       
 
     var obj = {
@@ -80,7 +79,7 @@ array.forEach(callback,[thisObject]),第一个参数为回掉函数，第二个�
     obj.arr.forEach(obj.callback, obj);
 
   结果：
-  ![img](img/in-post/arr-object-func/arr-foreach2.png) 
+![img](/img/in-post/arr-object-func/arr-foreach2.png) 
 其中在callback函数中调用的this指向的是obj，foreach的第二个参数填入obj，改变了this指向。      
 
 当数组元素为空，undefiend，null，false这些值的时候，只有空不会打印出来，但它还是数组的一位。    
@@ -91,7 +90,7 @@ array.forEach(callback,[thisObject]),第一个参数为回掉函数，第二个�
     })
 
   结果： 
-  ![img](img/arr-object-func/arr-foreach3.png) 
+![img](/img/arr-object-func/arr-foreach3.png) 
 + map():array.map(callback,[ thisObject]);map和forEach的用法相似。       
 
 map来说，callback函数需要return，能够用变量接住处理的元素，将这些元素放到一个数组里面。     
@@ -107,7 +106,7 @@ map来说，callback函数需要return，能够用变量接住处理的元素，
     console.log('forArr', forArr);
 
   结果：    
-  ![img](img/in-post/arr-object-func/arr-map1.png)    
+![img](/img/in-post/arr-object-func/arr-map1.png)    
 
 + filter()：array.filter(callback,[thisObject]);用于筛选，过滤元素。用法和map相似。     
 callback中如果元素进行判断返回true，则表示通过，false表示pass。     
@@ -125,7 +124,7 @@ callback中如果元素进行判断返回true，则表示通过，false表示pas
     console.log('filArr', filArr);
 
 结果：   
-![img](img/in-post/arr-object-func/arr-filter1.png)   
+![img](/img/in-post/arr-object-func/arr-filter1.png)   
 
 + some()：表示只要有一个callback函数返回true即可。    
     var arr = [1,2,3,4,5,6,7,8,9];
@@ -137,6 +136,6 @@ callback中如果元素进行判断返回true，则表示通过，false表示pas
     })
 
 结果：   
-![img](img/in-post/arr-object-func/arr-some1.png) 
+![img](/img/in-post/arr-object-func/arr-some1.png) 
 
 + every():表示所有的元素都必须满足
