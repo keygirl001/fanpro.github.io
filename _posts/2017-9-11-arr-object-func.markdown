@@ -1,16 +1,18 @@
 ---
 layout:    post
-title:     "js基本类型及其方法"
-subtitle:   " \"js基础知识"\""
+title:     "javaxcript基本类型及其方法"
+subtitle:   " \"js基础知识\""
 date:       2017/09/11
 author:     "CaoFan"
-header-img: "/img/arr-object-func.png"
+header-img: "img/arr-object-func.png"
 catalog: true
 tags:
-  - javascript
+  - 其他
 
 ---
->"javascript数组和对象基本用法"
+
+>"It's begining!"  
+
 
 ## 前言
 
