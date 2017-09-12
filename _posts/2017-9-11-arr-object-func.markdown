@@ -1,7 +1,7 @@
 ---
 layout:    post
 title:     "js基本类型及其方法"
-subtitle:   " \js基础知识"\""
+subtitle:   " \"js基础知识"\""
 date:       2017/09/11
 author:     "CaoFan"
 header-img: "img/arr-object-func.png"
@@ -16,12 +16,15 @@ tags:
 
 前几天面试被打击到了，我觉的对于校招的我们毕业生，最重要的是基础知识，突然觉得自己一直在学在总结框架的源码，该来复习总结一下前面的基础知识了。今天想总结一下数组、字符串和对象的常用方法以及一些实现方法。
 
+<p id="build"></p>
+---
+
 ## 正文       
 
-1.基本值类型：number、string、boolean、undefined、function、object，前五个为不可改变的原始值不可改变（栈内存，first in last out），后一种为引用值（堆内存）
-2.判断类型：typeof()打印number、string、boolean、undefined、function、object（null，数组，对象）；其中如果一个变量未经过定义就typeof()打印undefined，但是不会报错；typeof('undefined')打印string，typeof(undefined)打印undefined。                 
+1.基本值类型：number、string、boolean、undefined、function、object，前五个为不可改变的原始值不可改变（栈内存，first in last out），后一种为引用值（堆内存）           
+2.判断类型：typeof()打印number、string、boolean、undefined、function、object（null，数组，对象）；其中如果一个变量未经过定义就typeof()打印undefined，但是不会报错；typeof('undefined')打印string，typeof(undefined)打印undefined。                     
 `数组和对象`：Object.prototype.toString.call([])打印'[object Array]'  |  Object.prototype.toString.call([])打印'[object Object]'。    
-             [] instanceof Array打印false  |  {} instanceof Array打印true。       
+             [] instanceof Array打印false  |  {} instanceof Array打印true。          
 3.类型转换：
 * 显示类型转换：     
 > Number()  转换为数字，如果不能即为NaN；Number(false/null)打印0，Number(undefiend)打印NaN。     
@@ -58,8 +61,8 @@ tags:
       }
     })    
 
-结果：   
-![img](img/arr-object-func/arr-foreach1.png)     
+  结果：   
+  ![img](img/in-post/arr-object-func/arr-foreach1.png)     
 
 array.forEach(callback,[thisObject]),第一个参数为回掉函数，第二个参数表示可以改变this指向。       
 
@@ -76,8 +79,8 @@ array.forEach(callback,[thisObject]),第一个参数为回掉函数，第二个�
     }
     obj.arr.forEach(obj.callback, obj);
 
-结果：
-![img](img/arr-object-func/arr-foreach2.png) 
+  结果：
+  ![img](img/in-post/arr-object-func/arr-foreach2.png) 
 其中在callback函数中调用的this指向的是obj，foreach的第二个参数填入obj，改变了this指向。      
 
 当数组元素为空，undefiend，null，false这些值的时候，只有空不会打印出来，但它还是数组的一位。    
@@ -87,8 +90,8 @@ array.forEach(callback,[thisObject]),第一个参数为回掉函数，第二个�
       console.log(item, arr.length);
     })
 
-结果： 
-![img](img/arr-object-func/arr-foreach3.png) 
+  结果： 
+  ![img](img/arr-object-func/arr-foreach3.png) 
 + map():array.map(callback,[ thisObject]);map和forEach的用法相似。       
 
 map来说，callback函数需要return，能够用变量接住处理的元素，将这些元素放到一个数组里面。     
@@ -103,8 +106,8 @@ map来说，callback函数需要return，能够用变量接住处理的元素，
     })
     console.log('forArr', forArr);
 
-结果：    
-![img](img/arr-object-func/arr-map1.png)    
+  结果：    
+  ![img](img/in-post/arr-object-func/arr-map1.png)    
 
 + filter()：array.filter(callback,[thisObject]);用于筛选，过滤元素。用法和map相似。     
 callback中如果元素进行判断返回true，则表示通过，false表示pass。     
@@ -122,7 +125,7 @@ callback中如果元素进行判断返回true，则表示通过，false表示pas
     console.log('filArr', filArr);
 
 结果：   
-![img](img/arr-object-func/arr-filter1.png)   
+![img](img/in-post/arr-object-func/arr-filter1.png)   
 
 + some()：表示只要有一个callback函数返回true即可。    
     var arr = [1,2,3,4,5,6,7,8,9];
@@ -134,6 +137,6 @@ callback中如果元素进行判断返回true，则表示通过，false表示pas
     })
 
 结果：   
-![img](img/arr-object-func/arr-some1.png) 
+![img](img/in-post/arr-object-func/arr-some1.png) 
 
-
++ every():表示所有的元素都必须满足
