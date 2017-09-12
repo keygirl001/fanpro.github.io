@@ -7,7 +7,7 @@ author:     "CaoFan"
 header-img: "img/arr-object-func.png"
 catalog: true
 tags:
-  - 其他
+  - javascript
 
 ---
 
@@ -131,7 +131,7 @@ callback中如果元素进行判断返回true，则表示通过，false表示pas
 ![img](/img/in-post/arr-object-func/arr-filter1.png)   
 
 + some()：表示只要有一个callback函数返回true即可。      
-    
+
     var arr = [1,2,3,4,5,6,7,8,9];
     var num = 5;
     arr.some(function (item) {
