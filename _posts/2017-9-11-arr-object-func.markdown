@@ -142,4 +142,19 @@ callback中如果元素进行判断返回true，则表示通过，false表示pas
 结果：   
 ![img](/img/in-post/arr-object-func/arr-some1.png) 
 
- `every()`:表示所有的元素都必须满足条件
+ `every()`:表示所有的元素是否都返回true,只要其中有一个元素不满足，就返回false；   
+
+    var arr = [1,2,3,4,5,6];
+    var flag = arr.every(function (item, index) {
+      return item > 5;
+    });
+    console.log(flag);
+
+结果为false，因为不是所有的元素都大于5；        
+
+`indexOf(search, fromIndex)`:表示这个search元素，在这个数组中从fromIndex位置开始从前向后找到的第一个serach元素的索引，如果没有则返回-1。       
+indexOf(serach)：表示从第0位开始寻找；fromIndex默认为0；       
+indexOf(serach, '2'): 这时候会把字符串2转化为数字2，即从第2位开始寻找；       
+
+`lastIndexOf(search, fromIndex)`:表示这个search元素，在这个数组中从fromIndex位置开始从后向前找到的第一个serach元素的索引，如果没有则返回-1。    
+lastIndexOf(serach)：表示从第(arr.length - 1)位开始寻找；fromIndex默认为(arr.length - 1)；     
