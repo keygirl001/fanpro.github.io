@@ -25,8 +25,7 @@ tags:
 
 1.基本值类型：number、string、boolean、undefined、function、object，前五个为不可改变的原始值不可改变（栈内存，first in last out），后一种为引用值（堆内存）           
 2.判断类型：typeof()打印number、string、boolean、undefined、function、object（null，数组，对象）；其中如果一个变量未经过定义就typeof()打印undefined，但是不会报错；typeof('undefined')打印string，typeof(undefined)打印undefined。                     
-`数组和对象`：Object.prototype.toString.call([])打印'[object Array]'  |  Object.prototype.toString.call([])打印'[object Object]'。    
-             [] instanceof Array打印false  |  {} instanceof Array打印true。          
+`数组和对象`：Object.prototype.toString.call([])打印'[object Array]'； [] instanceof Array打印false；               
 3.类型转换：
 * 显示类型转换：     
 > Number()  转换为数字，如果不能即为NaN；Number(false/null)打印0，Number(undefiend)打印NaN。     
@@ -65,7 +64,7 @@ tags:
 
   结果：   
 ![img](/img/in-post/arr-object-func/arr-foreach1.png)     
-array.forEach(callback,[thisObject]),第一个参数为回掉函数，第二个参数表示可以改变this指向。       
+array.forEach(callback,[thisObject]),第一个参数为回掉函数，第二个参数表示可以改变this指向。             
 
     var obj = {
       arr: [1,2,3,4,5],
@@ -143,4 +142,4 @@ callback中如果元素进行判断返回true，则表示通过，false表示pas
 结果：   
 ![img](/img/in-post/arr-object-func/arr-some1.png) 
 
-+ every():表示所有的元素都必须满足
++ every():表示所有的元素都必须满足条件
