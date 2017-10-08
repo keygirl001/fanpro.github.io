@@ -53,7 +53,7 @@ tags:
 + es6新增的方法：Array.of(1,2,3);解决了上面的问题，Array.of(1)就表示[1];      
 
 2.es5新增的数组的方法：         
- forEach()：回掉func有三个参数，第一个参数为数组的每个元素，第二个参数为元素的索引，第三个参数为数组本身array必须这样填写。      
+ `forEach()`：回掉func有三个参数，第一个参数为数组的每个元素，第二个参数为元素的索引，第三个参数为数组本身array必须这样填写。      
 
     var arr = [1,2,3,4];
     arr.forEach(function (item, index, array) {
@@ -91,8 +91,8 @@ array.forEach(callback,[thisObject]),第一个参数为回掉函数，第二个�
     })
 
   结果： 
-![img](/img/arr-object-func/arr-foreach3.png) 
- map():array.map(callback,[ thisObject]);map和forEach的用法相似。       
+![img](/img/in-post/arr-object-func/arr-foreach3.png) 
+ `map()`:array.map(callback,[ thisObject]);map和forEach的用法相似。       
 
 map来说，callback函数需要return，能够用变量接住处理的元素，将这些元素放到一个数组里面。     
 
@@ -110,7 +110,7 @@ map来说，callback函数需要return，能够用变量接住处理的元素，
   结果：    
 ![img](/img/in-post/arr-object-func/arr-map1.png)      
 
- filter()：array.filter(callback,[thisObject]);用于筛选，过滤元素。用法和map相似。     
+ `filter()`：array.filter(callback,[thisObject]);用于筛选，过滤元素。用法和map相似。     
 callback中如果元素进行判断返回true，则表示通过，false表示pass。     
 
 看一下map和filter的区别？       
@@ -129,7 +129,7 @@ callback中如果元素进行判断返回true，则表示通过，false表示pas
 结果：   
 ![img](/img/in-post/arr-object-func/arr-filter1.png)   
 
- some()：表示只要有一个callback函数返回true即可。      
+ `some()`：表示只要有一个callback函数返回true即可。      
 
     var arr = [1,2,3,4,5,6,7,8,9];
     var num = 5;
@@ -142,4 +142,4 @@ callback中如果元素进行判断返回true，则表示通过，false表示pas
 结果：   
 ![img](/img/in-post/arr-object-func/arr-some1.png) 
 
- every():表示所有的元素都必须满足条件
+ `every()`:表示所有的元素都必须满足条件
