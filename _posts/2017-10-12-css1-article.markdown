@@ -4,14 +4,15 @@ title:     "为了精通css----第一篇"
 subtitle:   " \"css玄学？？！！\""
 date:       2017/10/12
 author:     "CaoFan"
-header-img: "img/css-bg.png"
+header-img: "img/css-bg.jpg"
 catalog: true
 tags:
   - css
 
 ---
 
->"It's begining!"  
+>"It's begining!"   
+
 
 ## 前言
 
