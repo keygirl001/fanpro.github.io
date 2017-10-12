@@ -23,10 +23,10 @@ tags:
 
 ## 正文       
 
-1.基本值类型：number、string、boolean、undefined、function、object，前五个为不可改变的原始值不可改变（栈内存，first in last out），后一种为引用值（堆内存）           
-2.判断类型：typeof()打印number、string、boolean、undefined、function、object（null，数组，对象）；其中如果一个变量未经过定义就typeof()打印undefined，但是不会报错；typeof('undefined')打印string，typeof(undefined)打印undefined。                     
-`数组和对象`：Object.prototype.toString.call([])打印'[object Array]'； [] instanceof Array打印false；               
-3.类型转换：
+1.`基本值类型：`number、string、boolean、undefined、function、object，前五个为不可改变的原始值不可改变（栈内存，first in last out），后一种为引用值（堆内存）           
+2.`判断类型：`typeof()打印number、string、boolean、undefined、function、object（null，数组，对象）；其中如果一个变量未经过定义就typeof()打印undefined，但是不会报错；typeof('undefined')打印string，typeof(undefined)打印undefined。                     
+`数组和对象：`Object.prototype.toString.call([])打印'[object Array]'； [] instanceof Array打印false；               
+3.`类型转换：`
 * 显示类型转换：     
 > Number()  转换为数字，如果不能即为NaN；Number(false/null)打印0，Number(undefiend)打印NaN。     
   String()  转换为字符串，如果参数为数组会变为字符串，对象则会打印"[object Object]"。             
@@ -35,11 +35,11 @@ tags:
   num.toString()  转换为字符串，num为undefined和null是会报错，同时数组会变为字符串，对象则会打印"[object Object]"。          
 
 * 隐式类型转换：   
-> ++/--：转换为数字，否则为NaN；num++表示先赋值再自增，++num表示先自增再赋值。其中`1++`，会报错，因为原始值不能改变，这时就会有一个问题了，那我var num = 1；num++就不会报错，是通过var声明的变量num实际上是window的一个属性，对象的属性是可以改变的；执行Number()。            
-+/-： 转换为数字；执行Number();              
-+：转换为字符串；字符串链接，执行String()，其中有一个字符串，否则为正常的加减。      
-*、/、-、%：转换为数字，执行Number()。              
-/>、<、>=、<=、==、！=：转换为数字，执行Number().           
+> `++/--`：转换为数字，否则为NaN；num++表示先赋值再自增，++num表示先自增再赋值。其中`1++`，会报错，因为原始值不能改变，这时就会有一个问题了，那我var num = 1；num++就不会报错，是通过var声明的变量num实际上是window的一个属性，对象的属性是可以改变的；执行Number()。                  
+`+/-`： 转换为数字；执行Number();              
+`+`：转换为字符串；字符串链接，执行String()，其中有一个字符串，否则为正常的加减。      
+`*、/、-、%`：转换为数字，执行Number()。              
+`/>、<、>=、<=、==、!=`：转换为数字，执行Number().           
 
 `其中不发生类型转换的：===、！==`
 
@@ -47,12 +47,12 @@ tags:
 
 
 ### Array   
-1.构造方法：      
+1.`构造方法：`      
 + 字面量：var arr = [1,2,3];     
 + 系统构造函数：var arr = new Array(1,2,3)；如果写一个参数表示生成n个undefined；            
 + es6新增的方法：Array.of(1,2,3);解决了上面的问题，Array.of(1)就表示[1];      
 
-2.es5新增的数组的方法：         
+2.`es5新增的数组的方法：`         
  `forEach()`：回掉func有三个参数，第一个参数为数组的每个元素，第二个参数为元素的索引，第三个参数为数组本身array必须这样填写。      
 
     var arr = [1,2,3,4];
@@ -152,9 +152,12 @@ callback中如果元素进行判断返回true，则表示通过，false表示pas
 
 结果为false，因为不是所有的元素都大于5；        
 
+  `reduce()`: array.reduce(callback, initial);          
+  callback中有四个参数：accumulator()，currentValue(当前数组的元素值)，currentIndex(表示正在处理的数组元素的索引)，array(表示当前的数组)
+
 `indexOf(search, fromIndex)`:表示这个search元素，在这个数组中从fromIndex位置开始从前向后找到的第一个serach元素的索引，如果没有则返回-1。       
 indexOf(serach)：表示从第0位开始寻找；fromIndex默认为0；       
 indexOf(serach, '2'): 这时候会把字符串2转化为数字2，即从第2位开始寻找；       
 
 `lastIndexOf(search, fromIndex)`:表示这个search元素，在这个数组中从fromIndex位置开始从后向前找到的第一个serach元素的索引，如果没有则返回-1。    
-lastIndexOf(serach)：表示从第(arr.length - 1)位开始寻找；fromIndex默认为(arr.length - 1)；     
+lastIndexOf(serach)：表示从第(arr.length - 1)位开始寻找；fromIndex默认为(arr.length - 1)；      
