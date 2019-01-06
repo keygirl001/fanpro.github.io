@@ -27,4 +27,6 @@ tags:
  
 ### 定位
 
-+ position定位属性值：static，absolute，relative，fixed，inherit...
+* `position`定位属性值：static，absolute，relative，fixed，inherit...       
+* 1.static: 默认值，不存在定位，没有top，bottom，left，right。       
+* 2.absolute: ①相对于最近有定位的父级进行定位，如果没有相对于浏览器进行定位。  
