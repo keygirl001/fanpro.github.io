@@ -41,7 +41,7 @@ this到底是什么呢？我理解的是：this是代表当前函数作用域的
     }
 
 
-在上面的这个test函数中，当它生成的时候就会有一个隐式的this，但并没有使用它，
+在上面的这个test函数中，当它生成的时候就会有一个隐式的this，但并没有使用它，     
 所以这里的this还是指向我们全局的this。（个人理解：涉及到作用域链的问题）    
 
 
@@ -55,9 +55,9 @@ this到底是什么呢？我理解的是：this是代表当前函数作用域的
     }
 
 
-上面提到我理解的作用域的问题：现在的作用域链上有两个作用域，从上到下是test函数作用域和全局作用域；
-首先我们在test作用域中找this对象下的a属性找到了，打印；
-接着找this下面的b属性，没找到就会往下面的作用域去找（全局作用域），找到了b打印（window的变量会自动挂载到this下）；        
+上面提到我理解的作用域的问题：现在的作用域链上有两个作用域，从上到下是test函数作用域和全局作用域；    
+首先我们在test作用域中找this对象下的a属性找到了，打印；      
+接着找this下面的b属性，没找到就会往下面的作用域去找（全局作用域），找到了b打印（window的变量会自动挂载到this下）；         
 
 3.setTimeout和setInterval中的this永远指向window；因为setTimeout和setInterval是挂载在window下面的；
 
@@ -174,7 +174,7 @@ bind(): bind()执行之后返回的是当前的函数；接着上面的那个例
     obj.fn2(); // 2
 
 
-fn2执行打印2很明显，是因为obj调用的它，所以this指向obj；
+fn2执行打印2很明显，是因为obj调用的它，所以this指向obj；      
 fn1的执行打印1，因为首先在obj中定义的fn1，其次箭头函数本身没有this，依赖外层代码块的this，对于obj来说它的this是指向window的，所以fn1里的this也指向window，打印1；
 
 
@@ -208,7 +208,8 @@ fn1执行打印的也是2，首先fn1的定义是在Test()执行的时候，这�
     Test.call({a:2});
 
 
-你会发现箭头函数打印的是2，而普通函数打印的是1；对于setTimeout来说它的this始终指向widnow的，但是箭头函数的this指向他定义的时候的外层代码块的this，即Test；    
+你会发现箭头函数打印的是2，而普通函数打印的是1；      
+对于setTimeout来说它的this始终指向widnow的，但是箭头函数的this指向他定义的时候的外层代码块的this，即Test；    
 
 
      var obj = {
@@ -228,7 +229,7 @@ fn1执行打印的也是2，首先fn1的定义是在Test()执行的时候，这�
     obj.fn1();
 
 
-这里借鉴阮老师的一个例子，对于第一个箭头函数的使用，会正确console，因为箭头函数的this指代的是fn1所指向的this，fn1是由obj调用的所以this指向obj；
+这里借鉴阮老师的一个例子，对于第一个箭头函数的使用，会正确console，因为箭头函数的this指代的是fn1所指向的this，fn1是由obj调用的所以this指向obj；      
 而对于第二个普通函数使用来说，this指向的是document，所以会报错，找不到fn2；  
 
 
@@ -291,8 +292,8 @@ fn1执行打印的也是2，首先fn1的定义是在Test()执行的时候，这�
     }
 
 ## 小结
-通过这些例子，总结几点：
-对于普通函数来说，this总指向window；但是谁调用它，this就指向它；call，apply，bind也会改变this指向；不要忘了setTimeout和setInterval的this永远指向window（使用箭头函数就要仔细考虑了）；
-对于构造函数来说，this总指向它构造的对象；
-箭头函数，this固定化，指向它定义时所在的this指向（this没有自己的this，所以通常由它外层代码块决定）；
-对于class类中的方法，最好都是用bind或者箭头函数，显示绑定实列的this；
+通过这些例子，总结几点：     
+对于普通函数来说，this总指向window；但是谁调用它，this就指向它；call，apply，bind也会改变this指向；不要忘了setTimeout和setInterval的this永远指向window（使用箭头函数就要仔细考虑了）；     
+对于构造函数来说，this总指向它构造的对象；      
+箭头函数，this固定化，指向它定义时所在的this指向（this没有自己的this，所以通常由它外层代码块决定）；     
+对于class类中的方法，最好都是用bind或者箭头函数，显示绑定实列的this；      
