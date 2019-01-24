@@ -2,7 +2,7 @@
 layout:    post
 title:     "原始值和引用值的理解"
 subtitle:   " \"js基础知识\""
-date:       2019/01/23
+date:       2019/01/15
 author:     "CaoFan"
 header-img: "img/arr-object-func.png"
 catalog: true
