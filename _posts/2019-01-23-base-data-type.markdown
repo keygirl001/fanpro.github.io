@@ -71,14 +71,14 @@ js的又分为原始值和引用值：原始值（number、string、boolean、un
 #### 引用值
 1.浅克隆（就是只进行一层克隆）：      
 `数组：`    
-\*使用扩展运算符：*\
+使用扩展运算符：
     
     var a = [1, 2, 3];
     var a1 = [...a1];
     a1[0] = 2;
     console.log(a, a1); // [1, 2, 3] [2, 2, 3]
 
-\*利用数组的循环遍历：*\
+利用数组的循环遍历：
 
     var arr = [1, 2, 3];
     var newArr = [];
@@ -92,14 +92,14 @@ js的又分为原始值和引用值：原始值（number、string、boolean、un
 主要是利用了将数组里的每一个原始值重新赋值，赋值的就和之前的每一个值都互不干扰；    
 
 `对象：`     
-\*使用扩展运算符：*\   
+使用扩展运算符：   
 
     var obj = {a: 1};
     var obj1 = {...obj};
     obj1.a = 2;
     console.log(obj, obj1); // {a: 1} {a: 2}
 
-\*for..in遍历对象：*\   
+for..in遍历对象：   
 
     var obj = {a: 1};
     var obj1 = new Object();
