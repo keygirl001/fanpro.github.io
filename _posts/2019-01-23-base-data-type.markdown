@@ -1,6 +1,6 @@
 ---
 layout:    post
-title:     "原始值和引用值得理解"
+title:     "原始值和引用值的理解"
 subtitle:   " \"js基础知识\""
 date:       2019/01/23
 author:     "CaoFan"
@@ -63,3 +63,50 @@ js的又分为原始值和引用值：原始值（number、string、boolean、un
 * 首先num是10，因为它是原始值，不会改变；    
 * obj1呢，它等于{ value: 'changed' }，是因为它是一个对象，它的值是可变的，当obj1当作实参传进来的时候，形参中的b就相当于赋值给obj1，那么它们的引用是指向同一个地址，所以b的改变也会导致obj1发生变化；        
 * obj2呢，它等于{ value: 'unchanged' }，是因为实际它内部执行过程是，先c = obj2；然后又将c = { value：changed }又重新指向了一个地址，所以obj2并不会发生改变；      
+
+### 原始值和引用值的克隆
+克隆就是给本体克隆一个副本，它们之间互相没有联系；
+#### 原始值
+对于原始值来说，它的克隆就是直接赋值给一个新的变量；
+#### 引用值
+1. 浅克隆（就是只进行一层克隆）：      
+`数组：`    
+*使用扩展运算符：
+    
+    var a = [1, 2, 3];
+    var a1 = [...a1];
+    a1[0] = 2;
+    console.log(a, a1); // [1, 2, 3] [2, 2, 3]
+
+*利用数组的循环遍历：
+
+    var arr = [1, 2, 3];
+    var newArr = [];
+    arr.forEach((item, index) => {
+      newArr[index] = item;
+    });
+    arr[0] = 2;
+    console.log(arr, newArr); // [2, 2, 3] [1, 2, 3]
+
+当然除了forEach还可以用其他的数组的遍历的方法；     
+主要是利用了将数组里的每一个原始值重新赋值，赋值的就和之前的每一个值都互不干扰；    
+
+`对象：`     
+*使用扩展运算符：   
+
+    var obj = {a: 1};
+    var obj1 = {...obj};
+    obj1.a = 2;
+    console.log(obj, obj1); // {a: 1} {a: 2}
+
+*for..in遍历对象：   
+
+    var obj = {a: 1};
+    var obj1 = new Object();
+    for(var props in obj) {
+      obj1[props] = obj[props];
+    }
+    obj1.a = 2;
+    console.log(obj, obj1); // {a: 1} {a: 2}
+
+同数组原理一样；将对象的每一个原始值都重新赋值；
