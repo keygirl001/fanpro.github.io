@@ -109,4 +109,109 @@ for..in遍历对象：
     obj1.a = 2;
     console.log(obj, obj1); // {a: 1} {a: 2}
 
-同数组原理一样；将对象的每一个原始值都重新赋值；
+同数组原理一样；将对象的每一个原始值都重新赋值；     
+
+2.深克隆（每一层都进行克隆）：    
+`数组：`    
+
+    var arr = [1, [1, 2, 3], 3];
+    
+    function deepCloneArr(arr) {
+      var newArr = new Array();
+      var len = arr.length;
+      for (var i = 0;i < len;i++) {
+        if (arr[i] instanceof Array) {
+          newArr[i] = deepCloneArr(arr[i]);
+        } else {
+          newArr[i] = arr[i];
+        }
+      }
+      return newArr;
+    }
+    var newArr1 = deepCloneArr(arr);
+    arr[1][0] = 2;
+    console.log(arr, newArr1); // [1, [2, 2, 3], 3]   [1, [1, 2, 3], 3]
+
+`对象：`   
+
+    var obj = {
+      a: '1',
+      b: { c: '2', f: { e: '4' } },
+      d: '3',
+    }
+
+    function deepCloneObject(obj) {
+      var newObj = new Object();
+      for (var props in obj) {
+        if (obj[props].constructor === Object) {
+          newObj[props] = deepCloneObject(obj[props]);
+        } else {
+          newObj[props] = obj[props];
+        }
+      }
+      return newObj;
+    }
+    var newObj1 = deepCloneObject(obj);
+    obj.b.f.e = '5';
+    console.log(obj, newObj1);
+
+最后我们整的更完美一点：    
+`数组`：   
+
+    var arr = [1, [1, 2, 3], 3, {a: 1}];
+    function deepCloneArr(arr) {
+      var newArr = [];
+      var len = arr.length;
+      for (var i = 0;i < len;i++) {
+        if (arr[i] instanceof Array) {
+          newArr[i] = deepCloneArr(arr[i]);
+        } else if(arr[i] instanceof Object) { // 如果数组里包含对象处理
+          newArr[i] = deepCloneObject(arr[i]);
+        } else {
+          newArr[i] = arr[i];
+        }
+      }
+      return newArr;
+    }
+    var newArr1 = deepCloneArr(arr);
+    arr[1][0] = 2;
+    arr[3].a = 2;
+    console.log(arr, newArr1); // [1, [2, 2, 3], 3, {a: 2}]   [1, [1, 2, 3], 3, {a: 1}]
+
+`对象`：     
+
+    var obj = {
+      a: '1',
+      b: { c: '2', f: [1, 2, 3] },
+      d: '3',
+    }
+
+    function deepCloneObject(obj) {
+      var newObj = new Object();
+      for (var props in obj) {
+        if (obj[props].constructor === Object) {
+          newObj[props] = deepCloneObject(obj[props]);
+        } else if (obj[props].constructor === Array) {
+          newObj[props] = deepCloneArr(obj[props]);
+        } else {
+          newObj[props] = obj[props];
+        }
+      }
+      return newObj;
+    }
+
+3.最后补充一点（区分数组和对象的方法）：    
+* Object.prototype.toString.call([])    --->  "[object Array]"       
+  Object.prototype.toString.call({})    --->  "[object Object]"    
+* Array.isArray([]) ---> true  其他都是false      
+* [].constructor === Array     
+  {}.constructor === Object    
+* [] instanceof Array   ---> true      
+  [] instanceof Object  ---> true     
+  {} instanceof Array   ---> false     
+  {} instanceof Object  ---> true      
+
+
+## 总结   
+我们只要记住原始值不可变，它们每次赋值都是新建变量并且指向的是不同的地址；    
+引用值来说是可变的，它们的赋值相当于指向同一个引用地址，所以你下面的属性改变，我的也会发生改变；    
